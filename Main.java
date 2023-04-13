@@ -32,11 +32,11 @@ public class Main {
 
     var result = mapper.readValue(response.body(), Page.class);
 
-    System.out.println("#title");
+    System.out.println("# title");
     System.out.println(result.title);
     for (Item item: result.story) {
       System.out.println("");
-      System.out.println("#"+item.type);
+      System.out.println("# "+item.type);
       System.out.println(item.text);
     }
   }

@@ -32,7 +32,7 @@ public class Main {
 
     var result = mapper.readValue(response.body(), Page.class);
 
-    System.out.println(result);
+    System.out.println(result.title);
   }
 
   @JsonIgnoreProperties(ignoreUnknown = true)

@@ -7,12 +7,17 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
+
+
   public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
 //    String url = "http://found.ward.bay.wiki.org/json-schema.json";
     String url = "http://ward.dojo.fed.wiki/dojo-practice-yearbooks.json";
@@ -41,6 +46,7 @@ public class Main {
 
       System.out.println("# title");
       System.out.println(result.title);
+      System.out.println(result.context());
       System.out.println("");
 
       for (Item item : result.story) {
@@ -72,6 +78,17 @@ public class Main {
     public String title;
     public List<Item> story;
     public List<Action> journal;
+
+    public List<String> context() {
+      List<String> sites = new ArrayList<String>();
+      var copy = new ArrayList<Action>(journal);
+      Collections.reverse(copy);
+      return copy.stream()
+        .filter(action -> action.site != null && !sites.contains(action.site))
+        .map(action -> action.site)
+        .peek(site -> sites.add(site))
+        .collect(Collectors.toList());
+    }
   }
 
   @JsonIgnoreProperties(ignoreUnknown = true)
@@ -81,7 +98,7 @@ public class Main {
     public String title;
     public String text;
 
-    private static final Pattern linkPattern = Pattern.compile(".*\\[\\[(.*)]].*");
+    private static final Pattern linkPattern = Pattern.compile("\\[\\[(.*?)]]");
 
     public List<String> links() {
       var matcher = linkPattern.matcher(text);

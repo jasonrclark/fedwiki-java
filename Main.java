@@ -81,13 +81,10 @@ public class Main {
 
     public List<String> context() {
       List<String> sites = new ArrayList<String>();
-      var copy = new ArrayList<Action>(journal);
-      Collections.reverse(copy);
-      return copy.stream()
-        .filter(action -> action.site != null && !sites.contains(action.site))
-        .map(action -> action.site)
-        .peek(site -> sites.add(site))
-        .collect(Collectors.toList());
+      for (int i=journal.size()-1; i>=0; i--)
+        if (journal.get(i).site != null && !sites.contains(journal.get(i).site))
+          sites.add(journal.get(i).site);
+      return sites;
     }
   }
 

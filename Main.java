@@ -25,6 +25,8 @@ public class Main {
       url = args[1];
     }
 
+    var scanner = new Scanner(System.in);
+
     while (true) {
       HttpRequest request = HttpRequest.newBuilder()
               .uri(new URI(url))
@@ -41,8 +43,6 @@ public class Main {
       var mapper = new ObjectMapper();
 
       var result = mapper.readValue(response.body(), Page.class);
-
-      var scanner = new Scanner(System.in);
 
       System.out.println("# title");
       System.out.println(result.title);

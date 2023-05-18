@@ -17,46 +17,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
 
-
   public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
-//    String url = "http://found.ward.bay.wiki.org/json-schema.json";
     String url = "http://ward.dojo.fed.wiki/dojo-practice-yearbooks.json";
-    if (args.length > 0) {
-      url = args[1];
-    }
+
+    if (args.length > 0) url = args[1];
+    Page result = fetch(url);
+    var scanner = new Scanner(System.in);
+    var lineno = 0;
 
     while (true) {
-      HttpRequest request = HttpRequest.newBuilder()
-              .uri(new URI(url))
-              .header("User-Agent", "fedwiki-java")
-              .version(HttpClient.Version.HTTP_1_1)
-              .GET()
-              .build();
-
-      HttpResponse<String> response = HttpClient
-              .newBuilder()
-              .build()
-              .send(request, HttpResponse.BodyHandlers.ofString());
-
-      var mapper = new ObjectMapper();
-
-      var result = mapper.readValue(response.body(), Page.class);
-
-      var scanner = new Scanner(System.in);
-
-      System.out.println("# title");
-      System.out.println(result.title);
-      System.out.println(result.context());
-      System.out.println("");
-
       for (Item item : result.story) {
-        System.out.println("# " + item.type);
-        System.out.println(item.text);
+        // System.out.println("# " + item.type);
+        item.println();
 
+        Thread.sleep(100);
         var cmd = scanner.nextLine();
-        if (cmd.equals("exit")) {
+        lineno++;
+        if (cmd.length() != 0) System.out.println(" <<" + String.valueOf(lineno) + " " + cmd + ">>");
+        if (cmd.startsWith("e")) {
           System.exit(0);
-        } else if (cmd.equals("l")) {
+        } else if (cmd.startsWith("l")) {
           if (item.links().size() > 0) {
             var title = item.links().get(0);
             var slug = title.replaceAll("\\s", "-")
@@ -64,6 +44,7 @@ public class Main {
                     .toLowerCase(Locale.getDefault());
 
             url = String.format("http://ward.dojo.fed.wiki/%s.json", slug);
+            result = fetch(url);
             break;
           } else {
             System.out.println("No link in this item");
@@ -72,6 +53,28 @@ public class Main {
       }
     }
   }
+
+  static Page fetch(String url) throws URISyntaxException, IOException, InterruptedException  {
+    HttpRequest request = HttpRequest.newBuilder()
+            .uri(new URI(url))
+            .header("User-Agent", "fedwiki-java")
+            .version(HttpClient.Version.HTTP_1_1)
+            .GET()
+            .build();
+    HttpResponse<String> response = HttpClient
+            .newBuilder()
+            .build()
+            .send(request, HttpResponse.BodyHandlers.ofString());
+    var mapper = new ObjectMapper();
+    Page result = mapper.readValue(response.body(), Page.class);
+    System.out.println("");
+    System.out.println(result.title);
+    System.out.println(result.context());
+    System.out.println("==========================================");
+    return result;
+  }
+
+
 
   @JsonIgnoreProperties(ignoreUnknown = true)
   public static class Page {
@@ -102,8 +105,11 @@ public class Main {
       if (matcher.find()) {
         return List.of(matcher.group(1));
       }
-
       return List.of();
+    }
+
+    public void println() {
+      System.out.println(text);
     }
   }
 

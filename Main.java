@@ -18,43 +18,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Main {
 
   public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
-    String url = "http://ward.dojo.fed.wiki/dojo-practice-yearbooks.json";
-
-    if (args.length > 0) url = args[1];
-    Page result = fetch(url);
+    String slug = "dojo-practice-yearbooks";
+    String context = "http://ward.dojo.fed.wiki/%s.json";
+    if (args.length > 0) slug = args[1];
+    Page result = fetch(context,slug);
     var scanner = new Scanner(System.in);
     var lineno = 0;
 
     while (true) {
       for (Item item : result.story) {
-        // System.out.println("# " + item.type);
         item.println();
-
-        Thread.sleep(100);
         var cmd = scanner.nextLine();
         lineno++;
         if (cmd.length() != 0) System.out.println(" <<" + String.valueOf(lineno) + " " + cmd + ">>");
-        if (cmd.startsWith("e")) {
-          System.exit(0);
-        } else if (cmd.startsWith("l")) {
-          if (item.links().size() > 0) {
-            var title = item.links().get(0);
-            var slug = title.replaceAll("\\s", "-")
-                    .replaceAll("[^A-Za-z0-9-]", "")
-                    .toLowerCase(Locale.getDefault());
-
-            url = String.format("http://ward.dojo.fed.wiki/%s.json", slug);
-            result = fetch(url);
-            break;
-          } else {
-            System.out.println("No link in this item");
-          }
-        }
+        if (cmd.startsWith("e")) System.exit(0);
+        if (cmd.startsWith("l")) {result = fetch(context,item.links().get(0)); break;}
       }
     }
   }
 
-  static Page fetch(String url) throws URISyntaxException, IOException, InterruptedException  {
+  static Page fetch(String context, String slug) throws URISyntaxException, IOException, InterruptedException  {
+    String url = String.format(context, slug);
     HttpRequest request = HttpRequest.newBuilder()
             .uri(new URI(url))
             .header("User-Agent", "fedwiki-java")
@@ -71,6 +55,7 @@ public class Main {
     System.out.println(result.title);
     System.out.println(result.context());
     System.out.println("==========================================");
+    Thread.sleep(100);
     return result;
   }
 
@@ -103,7 +88,11 @@ public class Main {
     public List<String> links() {
       var matcher = linkPattern.matcher(text);
       if (matcher.find()) {
-        return List.of(matcher.group(1));
+        var slug = matcher.group(1)
+          .replaceAll("\\s", "-")
+          .replaceAll("[^A-Za-z0-9-]", "")
+          .toLowerCase(Locale.getDefault());
+        return List.of(slug);
       }
       return List.of();
     }

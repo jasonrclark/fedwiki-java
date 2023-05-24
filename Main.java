@@ -25,7 +25,7 @@ public class Main {
     var scanner = new Scanner(System.in);
     var lineno = 0;
 
-    while (true) {
+    while (!result.story.isEmpty()) {
       for (Item item : result.story) {
         item.println();
         var cmd = scanner.nextLine();
@@ -49,6 +49,7 @@ public class Main {
             .newBuilder()
             .build()
             .send(request, HttpResponse.BodyHandlers.ofString());
+    if (response.statusCode() != 200) return new Page();
     var mapper = new ObjectMapper();
     Page result = mapper.readValue(response.body(), Page.class);
     System.out.println("");
@@ -63,9 +64,9 @@ public class Main {
 
   @JsonIgnoreProperties(ignoreUnknown = true)
   public static class Page {
-    public String title;
-    public List<Item> story;
-    public List<Action> journal;
+    public String title = "Empty";
+    public List<Item> story = List.of();
+    public List<Action> journal = List.of();
 
     public List<String> context() {
       List<String> sites = new ArrayList<String>();

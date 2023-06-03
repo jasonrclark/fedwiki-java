@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,6 +33,14 @@ public class Main {
         if (cmd.length() != 0) System.out.println(" <<" + String.valueOf(lineno) + " " + cmd + ">>");
         if (cmd.startsWith("e")) System.exit(0);
         if (cmd.startsWith("l")) {result = fetch(context,item.links().get(0)); break;}
+        if (cmd.startsWith("t")) {
+          // https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html
+          Pattern want = Pattern.compile(cmd.split(" ")[1]);
+          Matcher have = want.matcher(item.text);
+          boolean pass = have.find();
+          System.out.println(" <<" + (pass ? "pass" : "fail") + ">>");
+          if (!pass) System.exit(1);
+        }
       }
     }
   }

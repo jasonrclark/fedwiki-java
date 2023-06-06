@@ -16,14 +16,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
+    static int lineno = 0;
 
   public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
     String slug = "dojo-practice-yearbooks";
     String context = "http://ward.dojo.fed.wiki/%s.json";
     if (args.length > 0) slug = args[1];
     Page result = fetch(context,slug);
-    var scanner = new Scanner(System.in);
-    var lineno = 0;
 
     while (!result.story.isEmpty()) {
       for (Item item : result.story) {

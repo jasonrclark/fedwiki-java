@@ -18,21 +18,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     static int lineno = 0;
+    static String slug = "dojo-practice-yearbooks";
+    static String context = "http://ward.dojo.fed.wiki/%s.json";
+    static Page page;
 
   public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
-    String slug = "dojo-practice-yearbooks";
-    String context = "http://ward.dojo.fed.wiki/%s.json";
-    if (args.length > 0) slug = args[1];
-    Page result = fetch(context,slug);
-
-    while (!result.story.isEmpty()) {
-      for (Item item : result.story) {
+    // if (args.length > 0) slug = args[1];
+    page = fetch(context,slug);
+    while (!page.story.isEmpty()) {
+      for (Item item : page.story) {
         item.println();
         var cmd = scanner.nextLine();
         lineno++;
         if (cmd.length() != 0) System.out.println(" <<" + String.valueOf(lineno) + " " + cmd + ">>");
         if (cmd.startsWith("e")) System.exit(0);
-        if (cmd.startsWith("l")) {result = fetch(context,item.links().get(0)); break;}
+        if (cmd.startsWith("l")) {page = fetch(context,item.links().get(0)); break;}
         if (cmd.startsWith("t")) test(cmd,item);
       }
     }

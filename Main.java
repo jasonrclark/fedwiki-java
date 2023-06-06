@@ -33,16 +33,18 @@ public class Main {
         if (cmd.length() != 0) System.out.println(" <<" + String.valueOf(lineno) + " " + cmd + ">>");
         if (cmd.startsWith("e")) System.exit(0);
         if (cmd.startsWith("l")) {result = fetch(context,item.links().get(0)); break;}
-        if (cmd.startsWith("t")) {
-          // https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html
-          Pattern want = Pattern.compile(cmd.split(" ")[1]);
-          Matcher have = want.matcher(item.text);
-          boolean pass = have.find();
-          System.out.println(" <<" + (pass ? "pass" : "fail") + ">>");
-          if (!pass) System.exit(1);
-        }
+        if (cmd.startsWith("t")) test(cmd,item);
       }
     }
+  }
+
+  static void test (String cmd, Item item) {
+    // https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html
+    Pattern want = Pattern.compile(cmd.split(" ")[1]);
+    Matcher have = want.matcher(item.text);
+    boolean pass = have.find();
+    System.out.println(" <<" + (pass ? "pass" : "fail") + ">>");
+    if (!pass) System.exit(1);
   }
 
   static Page fetch(String context, String slug) throws URISyntaxException, IOException, InterruptedException  {

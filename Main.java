@@ -16,26 +16,41 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
+  // commands
     static Scanner scanner = new Scanner(System.in);
     static int lineno = 0;
+  // pages
     static String slug = "dojo-practice-yearbooks";
     static String context = "http://ward.dojo.fed.wiki/%s.json";
     static Page page;
+    static int itemno = 0;
 
   public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
-    // if (args.length > 0) slug = args[1];
+    if (args.length > 0) slug = args[1];
     page = fetch(context,slug);
-    while (!page.story.isEmpty()) {
-      for (Item item : page.story) {
-        item.println();
-        var cmd = scanner.nextLine();
-        lineno++;
-        if (cmd.length() != 0) System.out.println(" <<" + String.valueOf(lineno) + " " + cmd + ">>");
-        if (cmd.startsWith("e")) System.exit(0);
-        if (cmd.startsWith("l")) {page = fetch(context,item.links().get(0)); break;}
-        if (cmd.startsWith("t")) test(cmd,item);
-      }
+    Item shown = page.story.get(itemno);
+    while (true) {
+      Item item = page.story.get(itemno);
+      if(item != shown) {item.println(); shown = item;}
+      var cmd = scanner.nextLine();
+      lineno++;
+      if (cmd.length() != 0) System.out.println(" <<" + String.valueOf(lineno) + " " + cmd + ">>");
+      if (cmd.startsWith("e")) System.exit(0);
+      if (cmd.startsWith("l")) {page = fetch(context,item.links().get(0)); itemno = 0;}
+      if (cmd.startsWith("t")) test(cmd,item);
+      if (cmd.startsWith("f")) find(cmd);
+      if (cmd.startsWith("n")) next();
     }
+  }
+
+  static int next () {
+    itemno = (itemno+1) % page.story.size();
+    return itemno;
+  }
+
+  static void trouble(String msg) {
+    System.out.println(" <<" + msg + ">>");
+    System.exit(1);
   }
 
   static void test (String cmd, Item item) {
@@ -43,8 +58,17 @@ public class Main {
     Pattern want = Pattern.compile(cmd.split(" ")[1]);
     Matcher have = want.matcher(item.text);
     boolean pass = have.find();
-    System.out.println(" <<" + (pass ? "pass" : "fail") + ">>");
-    if (!pass) System.exit(1);
+    if (!pass) trouble("no match");
+  }
+
+  static void find (String cmd) {
+    Pattern want = Pattern.compile(cmd.split(" ")[1]);
+    int last = itemno;
+    while(next() != last) {
+      Matcher have = want.matcher(page.story.get(itemno).text);
+      if(have.find()) return;
+    }
+    trouble("not found");
   }
 
   static Page fetch(String context, String slug) throws URISyntaxException, IOException, InterruptedException  {
@@ -59,9 +83,11 @@ public class Main {
             .newBuilder()
             .build()
             .send(request, HttpResponse.BodyHandlers.ofString());
-    if (response.statusCode() != 200) return new Page();
+    var code = response.statusCode();
+    if (code != 200) trouble("status " + code);
     var mapper = new ObjectMapper();
     Page result = mapper.readValue(response.body(), Page.class);
+    itemno = 0;
     System.out.println("");
     System.out.println(result.title);
     System.out.println(result.context());
@@ -92,7 +118,7 @@ public class Main {
     public String type;
     public String id;
     public String title;
-    public String text;
+    public String text = "";
 
     private static final Pattern linkPattern = Pattern.compile("\\[\\[(.*?)]]");
 

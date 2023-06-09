@@ -16,29 +16,28 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
-  public static final String ANSI_RESET = "\u001B[0m";
-  public static final String ANSI_BLACK = "\u001B[30m";
-  public static final String ANSI_RED = "\u001B[31m";
-  public static final String ANSI_GREEN = "\u001B[32m";
-  public static final String ANSI_YELLOW = "\u001B[33m";
-  public static final String ANSI_BLUE = "\u001B[34m";
-  public static final String ANSI_PURPLE = "\u001B[35m";
-  public static final String ANSI_CYAN = "\u001B[36m";
-  public static final String ANSI_WHITE = "\u001B[37m";
-
+  // https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
 
   // commands
     static Scanner scanner = new Scanner(System.in);
     static int lineno = 0;
   // pages
-    static String slug = "dojo-practice-yearbooks";
-    // static String context = "http://ward.dojo.fed.wiki/%s.json";
+    static String slug = "welcome-visitors";
     static String origin = "ward.dojo.fed.wiki";
     static Page page;
     static int itemno = 0;
 
   public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
-    if (args.length > 0) slug = args[1];
+    if (args.length > 0) origin = args[1];
     List<String> context = new ArrayList<String>();
     page = fetch(context,slug);
     Item shown = page.story.get(itemno);
@@ -62,7 +61,7 @@ public class Main {
   }
 
   static void trouble(String msg) {
-    System.out.println(" <<" + msg + ">>");
+    System.out.println(ANSI_RED + " <<" + msg + ">>" + ANSI_RESET);
     System.exit(1);
   }
 
@@ -104,7 +103,6 @@ public class Main {
         itemno = 0;
         System.out.println("");
         System.out.println(result.title);
-        System.out.println(result.context());
         System.out.println("==========================================");
         return result;
       }

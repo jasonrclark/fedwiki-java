@@ -40,10 +40,10 @@ public class Main {
     if (args.length > 0) origin = args[1];
     List<String> context = new ArrayList<String>();
     page = fetch(context,slug);
-    Item shown = page.story.get(itemno);
+    Item shown = new Item();
     while (true) {
       Item item = page.story.get(itemno);
-      if(item != shown) {item.println(); shown = item;}
+      if(item.text != shown.text) {item.println(); shown = item;}
       var cmd = scanner.nextLine();
       lineno++;
       if (cmd.length() != 0) System.out.println(" <<" + String.valueOf(lineno) + " " + cmd + ">>");

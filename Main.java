@@ -16,17 +16,30 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
+  public static final String ANSI_RESET = "\u001B[0m";
+  public static final String ANSI_BLACK = "\u001B[30m";
+  public static final String ANSI_RED = "\u001B[31m";
+  public static final String ANSI_GREEN = "\u001B[32m";
+  public static final String ANSI_YELLOW = "\u001B[33m";
+  public static final String ANSI_BLUE = "\u001B[34m";
+  public static final String ANSI_PURPLE = "\u001B[35m";
+  public static final String ANSI_CYAN = "\u001B[36m";
+  public static final String ANSI_WHITE = "\u001B[37m";
+
+
   // commands
     static Scanner scanner = new Scanner(System.in);
     static int lineno = 0;
   // pages
     static String slug = "dojo-practice-yearbooks";
-    static String context = "http://ward.dojo.fed.wiki/%s.json";
+    // static String context = "http://ward.dojo.fed.wiki/%s.json";
+    static String origin = "ward.dojo.fed.wiki";
     static Page page;
     static int itemno = 0;
 
   public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
     if (args.length > 0) slug = args[1];
+    List<String> context = new ArrayList<String>();
     page = fetch(context,slug);
     Item shown = page.story.get(itemno);
     while (true) {
@@ -36,7 +49,7 @@ public class Main {
       lineno++;
       if (cmd.length() != 0) System.out.println(" <<" + String.valueOf(lineno) + " " + cmd + ">>");
       if (cmd.startsWith("e")) System.exit(0);
-      if (cmd.startsWith("l")) {page = fetch(context,item.links().get(0)); itemno = 0;}
+      if (cmd.startsWith("l")) {page = fetch(context,item.links().get(0)); context = page.context(); itemno = 0;}
       if (cmd.startsWith("t")) test(cmd,item);
       if (cmd.startsWith("f")) find(cmd);
       if (cmd.startsWith("n")) next();
@@ -71,31 +84,38 @@ public class Main {
     trouble("not found");
   }
 
-  static Page fetch(String context, String slug) throws URISyntaxException, IOException, InterruptedException  {
-    String url = String.format(context, slug);
-    HttpRequest request = HttpRequest.newBuilder()
-            .uri(new URI(url))
-            .header("User-Agent", "fedwiki-java")
-            .version(HttpClient.Version.HTTP_1_1)
-            .GET()
-            .build();
-    HttpResponse<String> response = HttpClient
-            .newBuilder()
-            .build()
-            .send(request, HttpResponse.BodyHandlers.ofString());
-    var code = response.statusCode();
-    if (code != 200) trouble("status " + code);
-    var mapper = new ObjectMapper();
-    Page result = mapper.readValue(response.body(), Page.class);
-    itemno = 0;
-    System.out.println("");
-    System.out.println(result.title);
-    System.out.println(result.context());
-    System.out.println("==========================================");
-    Thread.sleep(100);
-    return result;
+  static Page fetch(List<String> context, String slug) throws URISyntaxException, IOException, InterruptedException  {
+    String url = String.format("http://%s/%s.json", origin, slug);
+    while(true) {
+      HttpRequest request = HttpRequest.newBuilder()
+              .uri(new URI(url))
+              .header("User-Agent", "fedwiki-java")
+              .version(HttpClient.Version.HTTP_1_1)
+              .GET()
+              .build();
+      HttpResponse<String> response = HttpClient
+              .newBuilder()
+              .build()
+              .send(request, HttpResponse.BodyHandlers.ofString());
+      var code = response.statusCode();
+      if (code == 200) {
+        var mapper = new ObjectMapper();
+        Page result = mapper.readValue(response.body(), Page.class);
+        itemno = 0;
+        System.out.println("");
+        System.out.println(result.title);
+        System.out.println(result.context());
+        System.out.println("==========================================");
+        return result;
+      }
+      if(!context.isEmpty()) {
+        url = String.format("http://%s/%s.json", context.get(0), slug);
+        System.out.println(ANSI_YELLOW + url + ANSI_RESET );
+        context.remove(0);
+      } else
+        trouble("can't find page in current context");
+    }
   }
-
 
 
   @JsonIgnoreProperties(ignoreUnknown = true)

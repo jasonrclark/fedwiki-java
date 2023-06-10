@@ -19,8 +19,10 @@ sh test.sh
 
 The provided main program reads and executes commands from standard input.
 Commands are unique in their first letter so that is all that is required.
-A blank line will sequence through the items of the current page.
 
+- __next__ sequence through the items of the current page.
+- __test *word*__ confirm that *word* is present in current item.
+- __find *word*__ advance through items until *word* is found
 - __link__ resume following the first link in the current item.
 - __exit__ stop command execution and exit main.
 
@@ -28,7 +30,7 @@ A blank line will sequence through the items of the current page.
 
 Additional capabilites will be added as needs or curiosity motivates.
 
-- Resolve links based on provided context by the "collaborative linking" semantic.
+- Resolve links based on provided context by the "collaborative linking" semantic. ✔︎
 - Retain recently viewed pages in a managed lineup.
 - Accumulate sites as they are encountered to form a neighborhood.
 - Search for pages based on neighborhood sitemaps.

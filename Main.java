@@ -15,6 +15,8 @@ import java.util.regex.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+// I N T E R P R E T E R
+
 public class Main {
   // https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
     public static final String ANSI_RESET = "\u001B[0m";
@@ -30,11 +32,16 @@ public class Main {
   // commands
     static Scanner scanner = new Scanner(System.in);
     static int lineno = 0;
+
   // pages
     static String slug = "welcome-visitors";
     static String origin = "ward.dojo.fed.wiki";
     static Page page;
     static int itemno = 0;
+
+  // lineup
+    static List<Panel> lineup = List.of();
+    static int panelno = 0;
 
   public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
     if (args.length > 0) origin = args[1];
@@ -46,7 +53,7 @@ public class Main {
       if(item.text != shown.text) {item.println(); shown = item;}
       var cmd = scanner.nextLine();
       lineno++;
-      if (cmd.length() != 0) System.out.println(" <<" + String.valueOf(lineno) + " " + cmd + ">>");
+      if (cmd.length() != 0) log(String.valueOf(lineno) + " " + cmd);
       if (cmd.startsWith("e")) System.exit(0);
       if (cmd.startsWith("l")) {page = fetch(context,item.links().get(0)); context = page.context(); itemno = 0;}
       if (cmd.startsWith("t")) test(cmd,item);
@@ -55,9 +62,15 @@ public class Main {
     }
   }
 
+// H E L P E R S
+
   static int next () {
     itemno = (itemno+1) % page.story.size();
     return itemno;
+  }
+
+  static void log(String msg) {
+    System.out.println(ANSI_CYAN + " <<" + msg + ">>" + ANSI_RESET);
   }
 
   static void trouble(String msg) {
@@ -115,6 +128,16 @@ public class Main {
     }
   }
 
+// R U N T I M E
+
+  public static class Panel {
+    public String site;
+    public String slug;
+    public Page page;
+    public int itemno;
+  }
+
+// F E D E R A T I O N
 
   @JsonIgnoreProperties(ignoreUnknown = true)
   public static class Page {

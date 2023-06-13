@@ -36,46 +36,50 @@ public class Main {
   // pages
     static String slug = "welcome-visitors";
     static String origin = "ward.dojo.fed.wiki";
-    static Page page;
-    static int itemno = 0;
 
   // lineup
-    static List<Panel> lineup = List.of();
-    static int panelno = 0;
+    static List<Panel> lineup = new ArrayList<>();
+
 
   public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
     if (args.length > 0) origin = args[1];
-    List<String> context = new ArrayList<String>();
-    page = fetch(context,slug);
-    Item shown = new Item();
+    lineup.add(Panel.load(origin,slug));
+    String shown = null;
+
     while (true) {
-      Item item = page.story.get(itemno);
-      if(item.text != shown.text) {item.println(); shown = item;}
-      var cmd = scanner.nextLine();
-      lineno++;
-      if (cmd.length() != 0) log(String.valueOf(lineno) + " " + cmd);
+      Panel panel = lineup.get(lineup.size()-1);
+      Item item = panel.item();
+      if(!item.text.equals(shown)) {item.println(); shown = item.text;}
+      var cmd = nextLine();
       if (cmd.startsWith("e")) System.exit(0);
-      if (cmd.startsWith("l")) {page = fetch(context,item.links().get(0)); context = page.context(); itemno = 0;}
+      if (cmd.startsWith("l")) {lineup.add(Panel.load(panel.context(),panel.link()));}
       if (cmd.startsWith("t")) test(cmd,item);
       if (cmd.startsWith("f")) find(cmd);
-      if (cmd.startsWith("n")) next();
+      if (cmd.startsWith("n")) panel.next();
     }
   }
 
 // H E L P E R S
 
-  static int next () {
-    itemno = (itemno+1) % page.story.size();
-    return itemno;
-  }
 
   static void log(String msg) {
     System.out.println(ANSI_CYAN + " <<" + msg + ">>" + ANSI_RESET);
   }
 
+  static void debug(String msg) {
+    System.out.println(ANSI_YELLOW + msg + ANSI_RESET);
+  }
+
   static void trouble(String msg) {
     System.out.println(ANSI_RED + " <<" + msg + ">>" + ANSI_RESET);
     System.exit(1);
+  }
+
+  static String nextLine() {
+    var cmd = scanner.nextLine();
+    lineno++;
+    if (cmd.length() != 0) log(String.valueOf(lineno) + " " + cmd);
+    return cmd;
   }
 
   static void test (String cmd, Item item) {
@@ -87,54 +91,103 @@ public class Main {
   }
 
   static void find (String cmd) {
+    var panel = lineup.get(lineup.size()-1);
     Pattern want = Pattern.compile(cmd.split(" ")[1]);
-    int last = itemno;
-    while(next() != last) {
-      Matcher have = want.matcher(page.story.get(itemno).text);
+    int last = panel.itemno;
+    while(panel.next() != last) {
+      Matcher have = want.matcher(panel.item().text);
       if(have.find()) return;
     }
     trouble("not found");
   }
 
-  static Page fetch(List<String> context, String slug) throws URISyntaxException, IOException, InterruptedException  {
-    String url = String.format("http://%s/%s.json", origin, slug);
-    while(true) {
-      HttpRequest request = HttpRequest.newBuilder()
-              .uri(new URI(url))
-              .header("User-Agent", "fedwiki-java")
-              .version(HttpClient.Version.HTTP_1_1)
-              .GET()
-              .build();
-      HttpResponse<String> response = HttpClient
-              .newBuilder()
-              .build()
-              .send(request, HttpResponse.BodyHandlers.ofString());
-      var code = response.statusCode();
-      if (code == 200) {
-        var mapper = new ObjectMapper();
-        Page result = mapper.readValue(response.body(), Page.class);
-        itemno = 0;
-        System.out.println("");
-        System.out.println(result.title);
-        System.out.println("==========================================");
-        return result;
-      }
-      if(!context.isEmpty()) {
-        url = String.format("http://%s/%s.json", context.get(0), slug);
-        System.out.println(ANSI_YELLOW + url + ANSI_RESET );
-        context.remove(0);
-      } else
-        trouble("can't find page in current context");
+  static Page fetch(String url) throws URISyntaxException, IOException, InterruptedException  {
+    HttpRequest request = HttpRequest.newBuilder()
+            .uri(new URI(url))
+            .header("User-Agent", "fedwiki-java")
+            .version(HttpClient.Version.HTTP_1_1)
+            .GET()
+            .build();
+    HttpResponse<String> response = HttpClient
+            .newBuilder()
+            .build()
+            .send(request, HttpResponse.BodyHandlers.ofString());
+    var code = response.statusCode();
+    if (code == 200) {
+      var mapper = new ObjectMapper();
+      Page result = mapper.readValue(response.body(), Page.class);
+      System.out.println("");
+      for(Panel each : lineup) {System.out.println(each.page.title);}
+      System.out.println(result.title);
+      System.out.println("==========================================");
+      return result;
+    }
+    else {
+      return null;
     }
   }
 
+
 // R U N T I M E
 
-  public static class Panel {
+  private static class Panel {
     public String site;
     public String slug;
     public Page page;
     public int itemno;
+
+    public Panel(String site, String slug) {
+      this.site = site;
+      this.slug = slug;
+    }
+
+    public static Panel load(String site, String slug) throws URISyntaxException, IOException, InterruptedException {
+      var panel = new Panel(site,slug);
+      String url = String.format("http://%s/%s.json", site, slug);
+      panel.page = Main.fetch(url);
+      if(panel.page == null) trouble("can't find page at expected site");
+      panel.itemno = 0;
+      return panel;
+    }
+
+    public static Panel load(List<String> context, String slug) throws URISyntaxException, IOException, InterruptedException {
+      var site = origin;
+      while(true) {
+        String url = String.format("http://%s/%s.json", site, slug);
+        var page = Main.fetch(url);
+        if(page != null) {
+          var panel = new Panel(site,slug);
+          panel.page = page;
+          panel.itemno = 0;
+          return panel;
+        }
+        else {
+          if(!context.isEmpty()) {
+            site = context.get(0);
+            context.remove(0);
+          } else {
+            trouble("can't find page in current context");
+          }
+        }
+      }
+    }
+
+    public int next () {
+      this.itemno = (this.itemno+1) % this.page.story.size();
+      return this.itemno;
+    }
+
+    public Item item () {
+      return this.page.story.get(this.itemno);
+    }
+
+    public List<String> context () {
+      return this.page.context();
+    }
+
+    public String link () {
+      return this.item().links().get(0);
+    }
   }
 
 // F E D E R A T I O N

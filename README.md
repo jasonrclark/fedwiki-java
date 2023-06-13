@@ -31,7 +31,7 @@ Commands are unique in their first letter so that is all that is required.
 Additional capabilites will be added as needs or curiosity motivates.
 
 - Resolve links based on provided context by the "collaborative linking" semantic. ✔︎
-- Retain recently viewed pages in a managed lineup.
+- Retain recently viewed pages in a managed lineup. ✔︎
 - Accumulate sites as they are encountered to form a neighborhood.
 - Search for pages based on neighborhood sitemaps.
 - Provide implementations for selected plugins.

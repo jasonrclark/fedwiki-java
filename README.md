@@ -24,6 +24,7 @@ Commands are unique in their first letter so that is all that is required.
 - __test *word*__ confirm that *word* is present in current item.
 - __find *word*__ advance through items until *word* is found
 - __link__ resume following the first link in the current item.
+- __back *word*__ backup lineup to page with *word* in title.
 - __exit__ stop command execution and exit main.
 
 # roadmap

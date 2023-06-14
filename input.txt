@@ -10,4 +10,11 @@ find See
 link
 find Papert
 link
+back Yearbooks
+next
+link
+find Icosahedron
+link
+next
+next
 exit

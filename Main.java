@@ -55,6 +55,7 @@ public class Main {
       if (cmd.startsWith("l")) {lineup.add(Panel.load(panel.context(),panel.link()));}
       if (cmd.startsWith("t")) test(cmd,item);
       if (cmd.startsWith("f")) find(cmd);
+      if (cmd.startsWith("b")) back(cmd);
       if (cmd.startsWith("n")) panel.next();
     }
   }
@@ -98,7 +99,18 @@ public class Main {
       Matcher have = want.matcher(panel.item().text);
       if(have.find()) return;
     }
-    trouble("not found");
+    trouble("item not in story");
+  }
+
+  static void back (String cmd) {
+    Pattern want = Pattern.compile(cmd.split(" ")[1]);
+    while(lineup.size() > 0) {
+      var last = lineup.size()-1;
+      Matcher have = want.matcher(lineup.get(last).page.title);
+      if (have.find()) return;
+      lineup.remove(last);
+    }
+    trouble("title not in lineup");
   }
 
   static Page fetch(String url) throws URISyntaxException, IOException, InterruptedException  {

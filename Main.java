@@ -195,7 +195,12 @@ public class Main {
     }
 
     public List<String> context () {
-      return this.page.context();
+      var context = this.page.context();
+      if(!this.site.equals(origin)) {
+        context.remove(this.site);
+        context.add(0,this.site);
+      }
+      return context;
     }
 
     public String link () {

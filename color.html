@@ -1,0 +1,19 @@
+<pre id=report style="white-space: pre-wrap;">working</pre>
+<script type=module>
+  const ansi = {
+    '30': 'BLACK',
+    '31': 'RED',
+    '32': 'GREEN',
+    '33': 'LIMEGREEN',
+    '34': 'BLUE',
+    '35': 'PURPLE',
+    '36': 'DARKCYAN',
+    '37': 'WHITE'
+  }
+  const url = 'http://ward.dojo.fed.wiki/assets/pages/federation-browser-in-java/output.txt'
+  const text = await fetch(url).then(res => res.text())
+  window.report.innerHTML = text
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/\u001b\[(.*?)m/ig, (_,n) => n!='0' ? `<font color=${ansi[n]}>` : `</font>`)
+</script>

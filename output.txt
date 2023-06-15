@@ -1,0 +1,124 @@
+
+Welcome Visitors
+==========================================
+Welcome to this [[Federated Wiki]] site. From this page you can find who we are and what we do. New sites provide this information and then claim the site as their own. You will need your own site to participate.
+[36m << 1 find share >>[0m
+Pages where we do and share.
+[36m << 2 next >>[0m
+[[Dojo Practice Yearbooks]]
+[36m << 3 link >>[0m
+
+Welcome Visitors
+Dojo Practice Yearbooks
+==========================================
+We make pages here mostly for the making experience.
+[36m << 4 find 2020 >>[0m
+[[Dojo Practices 2020]] with diagrams
+[36m << 5 link >>[0m
+
+Welcome Visitors
+Dojo Practice Yearbooks
+Dojo Practices 2020
+==========================================
+We make pages here mostly for the making experience.
+[36m << 6 test experience >>[0m
+[36m << 7 find Embodiment >>[0m
+[[Embodiment Hypothesis]] 2015 Lakoff's life in linguistics.
+[36m << 8 link >>[0m
+
+Welcome Visitors
+Dojo Practice Yearbooks
+Dojo Practices 2020
+Embodiment Hypothesis
+==========================================
+George Lakoff: How Brains Think: The Embodiment Hypothesis.
+[36m << 9 find See >>[0m
+See [[Constructionism]]
+[36m << 10 link >>[0m
+[33m << eric.dojo.fed.wiki >>[0m
+[33m << wiki.dbbs.co >>[0m
+
+Welcome Visitors
+Dojo Practice Yearbooks
+Dojo Practices 2020
+Embodiment Hypothesis
+Constructionism
+==========================================
+Constructionist learning is when learners construct mental models to understand the world around them. It advocates student-centered, discovery learning where students use information they already know to acquire more knowledge. Students learn through participation in project-based learning where they make connections between different ideas and areas of knowledge facilitated by the teacher through coaching rather than using lectures or step-by-step guidance. [https://en.wikipedia.org/wiki/Constructionism_(learning_theory) wikipedia]
+[36m << 11 find Papert >>[0m
+See [[Seymour Papert]]
+[36m << 12 link >>[0m
+[33m << path.ward.asia.wiki.org >>[0m
+
+Welcome Visitors
+Dojo Practice Yearbooks
+Dojo Practices 2020
+Embodiment Hypothesis
+Constructionism
+Seymour Papert
+==========================================
+Marvin Minsky (left) and Seymour Papert in 1971
+[36m << 13 back Yearbooks >>[0m
+[[Dojo Practices 2020]] with diagrams
+[36m << 14 next >>[0m
+[[Dojo Practices 2021]] with scripts 
+[36m << 15 link >>[0m
+
+Welcome Visitors
+Dojo Practice Yearbooks
+Dojo Practices 2021
+==========================================
+We make pages here mostly for the making experience.
+[36m << 16 find Icosahedron >>[0m
+[[Cartesian Icosahedron]] enumerated vertices.
+[36m << 17 link >>[0m
+
+Welcome Visitors
+Dojo Practice Yearbooks
+Dojo Practices 2021
+Cartesian Icosahedron
+==========================================
+The following Cartesian coordinates define the vertices of an icosahedron with edge-length 2, centered at the origin:
+
+
+[36m << 18 next >>[0m
+Icosahedron
+[36m << 19 next >>[0m
+(0, ±1, ±𝝋)
+(±1, ±𝝋, 0)
+(±𝝋, 0, ±1)
+
+where 𝝋 = (1 + √5) / 2 is the golden ratio.
+[36m << 20 back Welcome >>[0m
+[[Dojo Practice Yearbooks]]
+[36m << 21 find Read >>[0m
+You can edit your copy of these pages. Press [+] to add more writing spaces. Read [[How to Wiki]] for more ideas. Follow [[Recent Changes]] here and nearby.
+[36m << 22 link >>[0m
+
+Welcome Visitors
+How To Wiki
+==========================================
+Here we describe how to use the web interface to the federated wiki. Read [[About Federated Wiki]] to learn about the project. If you are just starting to write in your first wiki then read the [[Field Guide to the Federation]].
+[36m << 23 link >>[0m
+[33m << fed.wiki.org >>[0m
+
+Welcome Visitors
+How To Wiki
+About Federated Wiki
+==========================================
+We remain excited about this platform and have become increasingly confident that it embodies important new ideas. We will explain.
+[36m << 24 find Mixed >>[0m
+[[Mixed Content]] on pages sufficient to get work done.
+[36m << 25 link >>[0m
+[33m << about.fed.wiki >>[0m
+
+Welcome Visitors
+How To Wiki
+About Federated Wiki
+Mixed Content
+==========================================
+Wiki extends its twenty year old namesake by providing an unbounded complement of markups of which only a few offer specific syntax for formatting text. The remaining markups configure plugins to show or do work we usually associate with applications.
+[36m << 26 find Formatting >>[0m
+See [[Formatting Strengths]] of various text markups.
+[36m << 27 link >>[0m
+[31m << can't find page in current context >>[0m

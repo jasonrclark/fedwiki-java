@@ -17,4 +17,12 @@ find Icosahedron
 link
 next
 next
+back Welcome
+find Read
+link
+link
+find Mixed
+link
+find Formatting
+link
 exit

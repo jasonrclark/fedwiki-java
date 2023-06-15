@@ -64,15 +64,15 @@ public class Main {
 
 
   static void log(String msg) {
-    System.out.println(ANSI_CYAN + " <<" + msg + ">>" + ANSI_RESET);
+    System.out.println(ANSI_CYAN + " << " + msg + " >>" + ANSI_RESET);
   }
 
   static void debug(String msg) {
-    System.out.println(ANSI_YELLOW + msg + ANSI_RESET);
+    System.out.println(ANSI_YELLOW + " << " + msg + " >>" + ANSI_RESET);
   }
 
   static void trouble(String msg) {
-    System.out.println(ANSI_RED + " <<" + msg + ">>" + ANSI_RESET);
+    System.out.println(ANSI_RED + " << " + msg + " >>" + ANSI_RESET);
     System.exit(1);
   }
 
@@ -176,6 +176,7 @@ public class Main {
         else {
           if(!context.isEmpty()) {
             site = context.get(0);
+            debug(site);
             context.remove(0);
           } else {
             trouble("can't find page in current context");

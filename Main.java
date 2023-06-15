@@ -42,7 +42,7 @@ public class Main {
 
 
   public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
-    if (args.length > 0) origin = args[1];
+    if (args.length > 0) origin = args[0];
     lineup.add(Panel.load(origin,slug));
     String shown = null;
 

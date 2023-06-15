@@ -48,7 +48,7 @@ Constructionist learning is when learners construct mental models to understand 
 [36m << 11 find Papert >>[0m
 See [[Seymour Papert]]
 [36m << 12 link >>[0m
-[33m << path.ward.asia.wiki.org >>[0m
+[33m << wiki.dbbs.co >>[0m
 
 Welcome Visitors
 Dojo Practice Yearbooks
@@ -110,6 +110,7 @@ We remain excited about this platform and have become increasingly confident tha
 [36m << 24 find Mixed >>[0m
 [[Mixed Content]] on pages sufficient to get work done.
 [36m << 25 link >>[0m
+[33m << fed.wiki.org >>[0m
 [33m << about.fed.wiki >>[0m
 
 Welcome Visitors
@@ -121,4 +122,13 @@ Wiki extends its twenty year old namesake by providing an unbounded complement o
 [36m << 26 find Formatting >>[0m
 See [[Formatting Strengths]] of various text markups.
 [36m << 27 link >>[0m
-[31m << can't find page in current context >>[0m
+[33m << about.fed.wiki >>[0m
+
+Welcome Visitors
+How To Wiki
+About Federated Wiki
+Mixed Content
+Formatting Strengths
+==========================================
+Wiki offers various markups for formatting text, each with a corresponding plugin that performs the transformation, and each with its own speciality. All implement the same markup for our specialty, the [[Collaborative Link]].
+[36m << 28 exit >>[0m

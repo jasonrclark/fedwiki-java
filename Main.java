@@ -41,7 +41,7 @@ public class Main {
     static List<Panel> lineup = new ArrayList<>();
 
 
-  public static void main(String... args) throws URISyntaxException, IOException, InterruptedException {
+  public static void main(String... args) {
     if (args.length > 0) origin = args[0];
     lineup.add(Panel.load(origin,slug));
     String shown = null;
@@ -52,7 +52,7 @@ public class Main {
       if(!item.text.equals(shown)) {item.println(); shown = item.text;}
       var cmd = nextLine();
       if (cmd.startsWith("e")) System.exit(0);
-      if (cmd.startsWith("l")) {lineup.add(Panel.load(panel.context(),panel.link()));}
+      if (cmd.startsWith("l")) link(panel);
       if (cmd.startsWith("t")) test(cmd,item);
       if (cmd.startsWith("f")) find(cmd);
       if (cmd.startsWith("b")) back(cmd);
@@ -61,7 +61,6 @@ public class Main {
   }
 
 // H E L P E R S
-
 
   static void log(String msg) {
     System.out.println(ANSI_CYAN + " << " + msg + " >>" + ANSI_RESET);
@@ -81,6 +80,13 @@ public class Main {
     lineno++;
     if (cmd.length() != 0) log(String.valueOf(lineno) + " " + cmd);
     return cmd;
+  }
+
+  static void link(Panel panel) {
+    lineup.add(Panel.load(panel.context(),panel.link()));
+    System.out.println("");
+    for(Panel each : lineup) {System.out.println(each.page.title);}
+    System.out.println("==========================================");
   }
 
   static void test (String cmd, Item item) {
@@ -113,30 +119,28 @@ public class Main {
     trouble("title not in lineup");
   }
 
-  static Page fetch(String url) throws URISyntaxException, IOException, InterruptedException  {
-    HttpRequest request = HttpRequest.newBuilder()
-            .uri(new URI(url))
-            .header("User-Agent", "fedwiki-java")
-            .version(HttpClient.Version.HTTP_1_1)
-            .GET()
-            .build();
-    HttpResponse<String> response = HttpClient
-            .newBuilder()
-            .build()
-            .send(request, HttpResponse.BodyHandlers.ofString());
-    var code = response.statusCode();
-    if (code == 200) {
-      var mapper = new ObjectMapper();
-      Page result = mapper.readValue(response.body(), Page.class);
-      System.out.println("");
-      for(Panel each : lineup) {System.out.println(each.page.title);}
-      System.out.println(result.title);
-      System.out.println("==========================================");
-      return result;
+  static Page fetch(String url) {
+    Page page = null;
+    try {
+      HttpRequest request = HttpRequest.newBuilder()
+        .uri(new URI(url))
+        .header("User-Agent", "fedwiki-java")
+        .version(HttpClient.Version.HTTP_1_1)
+        .GET()
+        .build();
+      HttpResponse<String> response = HttpClient
+        .newBuilder()
+        .build()
+        .send(request, HttpResponse.BodyHandlers.ofString());
+      var code = response.statusCode();
+      if (code == 200) {
+        var mapper = new ObjectMapper();
+        page = mapper.readValue(response.body(), Page.class);
+      }
+    } catch (URISyntaxException | IOException | InterruptedException e) {
+      trouble("http error: " + e.getMessage());
     }
-    else {
-      return null;
-    }
+    return page;
   }
 
 
@@ -153,7 +157,7 @@ public class Main {
       this.slug = slug;
     }
 
-    public static Panel load(String site, String slug) throws URISyntaxException, IOException, InterruptedException {
+    public static Panel load(String site, String slug) {
       var panel = new Panel(site,slug);
       String url = String.format("http://%s/%s.json", site, slug);
       panel.page = Main.fetch(url);
@@ -162,7 +166,7 @@ public class Main {
       return panel;
     }
 
-    public static Panel load(List<String> context, String slug) throws URISyntaxException, IOException, InterruptedException {
+    public static Panel load(List<String> context, String slug) {
       var site = origin;
       while(true) {
         String url = String.format("http://%s/%s.json", site, slug);
@@ -207,6 +211,7 @@ public class Main {
       return this.item().links().get(0);
     }
   }
+
 
 // F E D E R A T I O N
 

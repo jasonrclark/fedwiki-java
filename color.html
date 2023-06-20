@@ -1,5 +1,8 @@
 <pre id=report style="white-space: pre-wrap;">working</pre>
 <script type=module>
+
+  import * as frame from 'http://code.fed.wiki/assets/v1/frame.js'
+
   const ansi = {
     '30': 'BLACK',
     '31': 'RED',
@@ -12,8 +15,33 @@
   }
   const url = 'http://ward.dojo.fed.wiki/assets/pages/federation-browser-in-java/output.txt'
   const text = await fetch(url).then(res => res.text())
-  window.report.innerHTML = text
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/\u001b\[(.*?)m/ig, (_,n) => n!='0' ? `<font color=${ansi[n]}>` : `</font>`)
+
+  window.doopen = event =>
+    window.parent.postMessage({
+      action:"doInternalLink",
+      title: event.target.textContent,
+      site: event.target.dataset.site,
+      keepLineup: event.shiftKey
+    }, "*")
+
+  let tail = ''
+  window.report.innerHTML = text.split(/\n/)
+    .map(line => {
+      const summary = line.match(/ << \d+ case (.*?) >>/)
+      if(summary) {
+        const head = `${tail}<details><summary>${summary[1]}</summary>`
+        tail = `</details>`
+        return head
+      }
+      const head = line.match(/^(.*?)\u001b\[32m (.*?)\u001b\[0m/)
+      if (head) {
+        return `<img width=10 src="http://${head[2]}/favicon.png"> <span data-site=${head[2]} onclick=doopen(event)>${head[1]}</span>\n`
+      }
+      return line
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/\u001b\[(.*?)m/ig, (_,n) => n!='0' ? `<font color=${ansi[n]}>` : `</font>`)
+        .replace(/$/,"\n")
+    })
+    .join("")+tail
 </script>

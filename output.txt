@@ -1,134 +1,227 @@
-
-Welcome Visitors
-==========================================
 Welcome to this [[Federated Wiki]] site. From this page you can find who we are and what we do. New sites provide this information and then claim the site as their own. You will need your own site to participate.
-[36m << 1 find share >>[0m
+[36m << 1 case find pages we share >>[0m
+[36m << 2 find share >>[0m
 Pages where we do and share.
-[36m << 2 next >>[0m
+[36m << 3 next >>[0m
 [[Dojo Practice Yearbooks]]
-[36m << 3 link >>[0m
+[36m << 4 link >>[0m
 
-Welcome Visitors
-Dojo Practice Yearbooks
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
 ==========================================
 We make pages here mostly for the making experience.
-[36m << 4 find 2020 >>[0m
+[36m << 5 find 2020 >>[0m
 [[Dojo Practices 2020]] with diagrams
-[36m << 5 link >>[0m
+[36m << 6 link >>[0m
 
-Welcome Visitors
-Dojo Practice Yearbooks
-Dojo Practices 2020
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2020[32m ward.dojo.fed.wiki[0m
 ==========================================
 We make pages here mostly for the making experience.
-[36m << 6 test experience >>[0m
-[36m << 7 find Embodiment >>[0m
+[36m << 7 test experience >>[0m
+[36m << 8 case browse from forked page >>[0m
+[36m << 9 find Embodiment >>[0m
 [[Embodiment Hypothesis]] 2015 Lakoff's life in linguistics.
-[36m << 8 link >>[0m
+[36m << 10 link >>[0m
 
-Welcome Visitors
-Dojo Practice Yearbooks
-Dojo Practices 2020
-Embodiment Hypothesis
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2020[32m ward.dojo.fed.wiki[0m
+Embodiment Hypothesis[32m ward.dojo.fed.wiki[0m
 ==========================================
 George Lakoff: How Brains Think: The Embodiment Hypothesis.
-[36m << 9 find See >>[0m
+[36m << 11 find See >>[0m
 See [[Constructionism]]
-[36m << 10 link >>[0m
+[36m << 12 link >>[0m
 [33m << eric.dojo.fed.wiki >>[0m
 [33m << wiki.dbbs.co >>[0m
 
-Welcome Visitors
-Dojo Practice Yearbooks
-Dojo Practices 2020
-Embodiment Hypothesis
-Constructionism
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2020[32m ward.dojo.fed.wiki[0m
+Embodiment Hypothesis[32m ward.dojo.fed.wiki[0m
+Constructionism[32m wiki.dbbs.co[0m
 ==========================================
 Constructionist learning is when learners construct mental models to understand the world around them. It advocates student-centered, discovery learning where students use information they already know to acquire more knowledge. Students learn through participation in project-based learning where they make connections between different ideas and areas of knowledge facilitated by the teacher through coaching rather than using lectures or step-by-step guidance. [https://en.wikipedia.org/wiki/Constructionism_(learning_theory) wikipedia]
-[36m << 11 find Papert >>[0m
+[36m << 13 find Papert >>[0m
 See [[Seymour Papert]]
-[36m << 12 link >>[0m
+[36m << 14 link >>[0m
 [33m << wiki.dbbs.co >>[0m
 
-Welcome Visitors
-Dojo Practice Yearbooks
-Dojo Practices 2020
-Embodiment Hypothesis
-Constructionism
-Seymour Papert
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2020[32m ward.dojo.fed.wiki[0m
+Embodiment Hypothesis[32m ward.dojo.fed.wiki[0m
+Constructionism[32m wiki.dbbs.co[0m
+Seymour Papert[32m wiki.dbbs.co[0m
 ==========================================
 Marvin Minsky (left) and Seymour Papert in 1971
-[36m << 13 back Yearbooks >>[0m
+[36m << 15 case try unicode letters >>[0m
+[36m << 16 back Yearbooks >>[0m
 [[Dojo Practices 2020]] with diagrams
-[36m << 14 next >>[0m
+[36m << 17 next >>[0m
 [[Dojo Practices 2021]] with scripts 
-[36m << 15 link >>[0m
+[36m << 18 link >>[0m
 
-Welcome Visitors
-Dojo Practice Yearbooks
-Dojo Practices 2021
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2021[32m ward.dojo.fed.wiki[0m
 ==========================================
 We make pages here mostly for the making experience.
-[36m << 16 find Icosahedron >>[0m
+[36m << 19 find Icosahedron >>[0m
 [[Cartesian Icosahedron]] enumerated vertices.
-[36m << 17 link >>[0m
+[36m << 20 link >>[0m
 
-Welcome Visitors
-Dojo Practice Yearbooks
-Dojo Practices 2021
-Cartesian Icosahedron
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2021[32m ward.dojo.fed.wiki[0m
+Cartesian Icosahedron[32m ward.dojo.fed.wiki[0m
 ==========================================
 The following Cartesian coordinates define the vertices of an icosahedron with edge-length 2, centered at the origin:
 
 
-[36m << 18 next >>[0m
+[36m << 21 next >>[0m
 Icosahedron
-[36m << 19 next >>[0m
+[36m << 22 next >>[0m
 (0, ±1, ±𝝋)
 (±1, ±𝝋, 0)
 (±𝝋, 0, ±1)
 
 where 𝝋 = (1 + √5) / 2 is the golden ratio.
-[36m << 20 back Welcome >>[0m
+[36m << 23 case remote page as context >>[0m
+[36m << 24 back Welcome >>[0m
 [[Dojo Practice Yearbooks]]
-[36m << 21 find Read >>[0m
+[36m << 25 find Read >>[0m
 You can edit your copy of these pages. Press [+] to add more writing spaces. Read [[How to Wiki]] for more ideas. Follow [[Recent Changes]] here and nearby.
-[36m << 22 link >>[0m
+[36m << 26 link >>[0m
 
-Welcome Visitors
-How To Wiki
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+How To Wiki[32m ward.dojo.fed.wiki[0m
 ==========================================
 Here we describe how to use the web interface to the federated wiki. Read [[About Federated Wiki]] to learn about the project. If you are just starting to write in your first wiki then read the [[Field Guide to the Federation]].
-[36m << 23 link >>[0m
+[36m << 27 link >>[0m
 [33m << fed.wiki.org >>[0m
 
-Welcome Visitors
-How To Wiki
-About Federated Wiki
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+How To Wiki[32m ward.dojo.fed.wiki[0m
+About Federated Wiki[32m fed.wiki.org[0m
 ==========================================
 We remain excited about this platform and have become increasingly confident that it embodies important new ideas. We will explain.
-[36m << 24 find Mixed >>[0m
+[36m << 28 find Mixed >>[0m
 [[Mixed Content]] on pages sufficient to get work done.
-[36m << 25 link >>[0m
+[36m << 29 link >>[0m
 [33m << fed.wiki.org >>[0m
 [33m << about.fed.wiki >>[0m
 
-Welcome Visitors
-How To Wiki
-About Federated Wiki
-Mixed Content
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+How To Wiki[32m ward.dojo.fed.wiki[0m
+About Federated Wiki[32m fed.wiki.org[0m
+Mixed Content[32m about.fed.wiki[0m
 ==========================================
 Wiki extends its twenty year old namesake by providing an unbounded complement of markups of which only a few offer specific syntax for formatting text. The remaining markups configure plugins to show or do work we usually associate with applications.
-[36m << 26 find Formatting >>[0m
+[36m << 30 find Formatting >>[0m
 See [[Formatting Strengths]] of various text markups.
-[36m << 27 link >>[0m
+[36m << 31 link >>[0m
 [33m << about.fed.wiki >>[0m
 
-Welcome Visitors
-How To Wiki
-About Federated Wiki
-Mixed Content
-Formatting Strengths
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+How To Wiki[32m ward.dojo.fed.wiki[0m
+About Federated Wiki[32m fed.wiki.org[0m
+Mixed Content[32m about.fed.wiki[0m
+Formatting Strengths[32m about.fed.wiki[0m
 ==========================================
 Wiki offers various markups for formatting text, each with a corresponding plugin that performs the transformation, and each with its own speciality. All implement the same markup for our specialty, the [[Collaborative Link]].
-[36m << 28 exit >>[0m
+[36m << 32 case reference plugin as context >>[0m
+[36m << 33 back Welcome >>[0m
+You can edit your copy of these pages. Press [+] to add more writing spaces. Read [[How to Wiki]] for more ideas. Follow [[Recent Changes]] here and nearby.
+[36m << 34 find Yearbooks >>[0m
+[[Dojo Practice Yearbooks]]
+[36m << 35 link >>[0m
+
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+==========================================
+We make pages here mostly for the making experience.
+[36m << 36 find 2022 >>[0m
+[[Dojo Practices 2022]] with graphs
+[36m << 37 link >>[0m
+
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2022[32m ward.dojo.fed.wiki[0m
+==========================================
+We make pages here mostly for the making experience.
+[36m << 38 find Mock >>[0m
+[[Mock Graph Data]] to test new neo4j import.
+[36m << 39 link >>[0m
+
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2022[32m ward.dojo.fed.wiki[0m
+Mock Graph Data[32m ward.dojo.fed.wiki[0m
+==========================================
+We wrote a mock data generator that was designed to push data into an aggregator, unlike El Dorado that used a pull model. This project never finished but we might reuse the data for other experiments. [https://github.com/WardCunningham/context-map-data/blob/master/regenerate.rb github]
+[36m << 40 find Tips >>[0m
+Here we collect various mentions of the work we've done observing software through the metadata produced throughout its creation and operation. See [[Tips for Modeling]]
+[36m << 41 link >>[0m
+[33m << ddd.ward.wiki.org >>[0m
+
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2022[32m ward.dojo.fed.wiki[0m
+Mock Graph Data[32m ward.dojo.fed.wiki[0m
+Tips for Modeling[32m ddd.ward.wiki.org[0m
+==========================================
+We suggest an incremental approach where new sources are added to a daily build and explored with ad-hoc queries before choosing a more permanent representation as nodes and relations.
+[36m << 42 test incremental >>[0m
+[36m << 43 case reference and journal as context >>[0m
+[36m << 44 back Yearbooks >>[0m
+[[Dojo Practices 2022]] with graphs
+[36m << 45 find 2021 >>[0m
+[[Dojo Practices 2021]] with scripts 
+[36m << 46 link >>[0m
+
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2021[32m ward.dojo.fed.wiki[0m
+==========================================
+We make pages here mostly for the making experience.
+[36m << 47 find India >>[0m
+[[Agile India 2021]] keynote presentation.
+[36m << 48 link >>[0m
+
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2021[32m ward.dojo.fed.wiki[0m
+Agile India 2021[32m ward.dojo.fed.wiki[0m
+==========================================
+Would you be interested in presenting at the Agile India conference virtually in Nov 2021? I understand you might not be very keen to speak at an Agile event. Few of the original thought leaders have the same reaction. But sometimes if I ask them enough, they do change their minds.
+[36m << 49 find Creativity >>[0m
+Ward is a computer programmer who believes in radically simplifying methods. He's best known as the inventor of the first wiki, and one of the pioneers of software design patterns and Extreme Programming, not to mention being a co-author of the Agile Manifesto. It's a real privilege to have Ward sharing from his wealth of experience at Agile India in his keynote: [[Creativity Before and After Agile]].
+[36m << 50 link >>[0m
+
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2021[32m ward.dojo.fed.wiki[0m
+Agile India 2021[32m ward.dojo.fed.wiki[0m
+Creativity Before and After Agile[32m ward.dojo.fed.wiki[0m
+==========================================
+Organisms small and large learn by building a model of the world around them then testing that model against what they see and adjusting accordingly. We'll call this a learning loop. We identify three era in computing based on the nature of this loop and the kind of feedback learning that they support.
+[36m << 51 find Synchronization >>[0m
+We compare this document's layers of process, technique and responsibility to Woods ten theorems and find one missing. See S4, [[Synchronization Required]] 
+[36m << 52 link >>[0m
+[33m << norms.ward.asia.wiki.org >>[0m
+[33m << code.fed.wiki >>[0m
+
+Welcome Visitors[32m ward.dojo.fed.wiki[0m
+Dojo Practice Yearbooks[32m ward.dojo.fed.wiki[0m
+Dojo Practices 2021[32m ward.dojo.fed.wiki[0m
+Agile India 2021[32m ward.dojo.fed.wiki[0m
+Creativity Before and After Agile[32m ward.dojo.fed.wiki[0m
+Synchronization Required[32m code.fed.wiki[0m
+==========================================
+[[S4]]: No single unit, regardless of level or scope, can have sufficient range of adaptive behavior to manage the risk of saturation alone, therefore, alignment and coordination are needed across multiple interdependent units in a network.
+
+[36m << 53 case done >>[0m
+[36m << 54 exit >>[0m

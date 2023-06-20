@@ -1,15 +1,18 @@
+case find pages we share
 find share
 next
 link
 find 2020
 link
 test experience
+case browse from forked page
 find Embodiment
 link
 find See
 link
 find Papert
 link
+case try unicode letters
 back Yearbooks
 next
 link
@@ -17,6 +20,7 @@ find Icosahedron
 link
 next
 next
+case remote page as context
 back Welcome
 find Read
 link
@@ -25,6 +29,7 @@ find Mixed
 link
 find Formatting
 link
+case reference plugin as context
 back Welcome
 find Yearbooks
 link
@@ -35,4 +40,15 @@ link
 find Tips
 link
 test incremental
+case reference and journal as context
+back Yearbooks
+find 2021
+link
+find India
+link
+find Creativity
+link
+find Synchronization
+link
+case done
 exit

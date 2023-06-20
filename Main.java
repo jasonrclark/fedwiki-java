@@ -52,6 +52,7 @@ public class Main {
       if(!item.text.equals(shown)) {item.println(); shown = item.text;}
       var cmd = nextLine();
       if (cmd.startsWith("e")) System.exit(0);
+      if (cmd.startsWith("c")) System.err.println(cmd);
       if (cmd.startsWith("l")) link(panel);
       if (cmd.startsWith("t")) test(cmd,item);
       if (cmd.startsWith("f")) find(cmd);
@@ -85,7 +86,8 @@ public class Main {
   static void link(Panel panel) {
     lineup.add(Panel.load(panel,panel.link()));
     System.out.println("");
-    for(Panel each : lineup) {System.out.println(each.page.title);}
+    for(Panel each : lineup)
+      System.out.println(each.page.title + ANSI_GREEN + " " + each.site + ANSI_RESET);
     System.out.println("==========================================");
   }
 

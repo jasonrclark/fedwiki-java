@@ -83,7 +83,7 @@ public class Main {
   }
 
   static void link(Panel panel) {
-    lineup.add(Panel.load(panel.context(),panel.link()));
+    lineup.add(Panel.load(panel,panel.link()));
     System.out.println("");
     for(Panel each : lineup) {System.out.println(each.page.title);}
     System.out.println("==========================================");
@@ -166,7 +166,12 @@ public class Main {
       return panel;
     }
 
-    public static Panel load(List<String> context, String slug) {
+    public static Panel load(Panel from, String slug) {
+      var context = from.context();
+      if(from.item().site != null) {
+        context.remove(from.item().site);
+        context.add(0,from.item().site);
+      }
       var site = origin;
       while(true) {
         String url = String.format("http://%s/%s.json", site, slug);
@@ -236,6 +241,8 @@ public class Main {
     public String id;
     public String title;
     public String text = "";
+    public String site;
+    public String slug;
 
     private static final Pattern linkPattern = Pattern.compile("\\[\\[(.*?)]]");
 

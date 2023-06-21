@@ -20,6 +20,7 @@ sh test.sh
 The provided main program reads and executes commands from standard input.
 Commands are unique in their first letter so that is all that is required.
 
+- __case *words*__ motivating *words* for subsequent commands.
 - __next__ sequence through the items of the current page.
 - __test *word*__ confirm that *word* is present in current item.
 - __find *word*__ advance through items until *word* is found

@@ -83,12 +83,24 @@ public class Main {
     return cmd;
   }
 
+  static String location() {
+    var url = "http://" + origin;
+    for(Panel each : lineup) {
+      if(each.site.equals(origin))
+        url += "/view/" + each.slug;
+      else
+        url += "/" + each.site + "/" + each.slug;
+    }
+    return url;
+  }
+
   static void link(Panel panel) {
     lineup.add(Panel.load(panel,panel.link()));
     System.out.println("");
     for(Panel each : lineup)
       System.out.println(each.page.title + ANSI_GREEN + " " + each.site + ANSI_RESET);
     System.out.println("==========================================");
+    System.out.println(ANSI_PURPLE + location() + ANSI_RESET);
   }
 
   static void test (String cmd, Item item) {

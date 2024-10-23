@@ -58,6 +58,7 @@ public class Main {
       if (cmd.startsWith("f")) find(cmd);
       if (cmd.startsWith("b")) back(cmd);
       if (cmd.startsWith("n")) panel.next();
+      if (cmd.isEmpty()) panel.next();
     }
   }
 

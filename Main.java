@@ -9,6 +9,8 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.regex.*;
 
@@ -40,6 +42,8 @@ public class Main {
   // lineup
     static List<Panel> lineup = new ArrayList<>();
 
+  // neighborhood
+    static Map<String, Neighbor> neighborhood = new HashMap<String, Neighbor>();
 
   public static void main(String... args) {
     if (args.length > 0) origin = args[0];
@@ -187,6 +191,8 @@ public class Main {
         context.remove(from.item().site);
         context.add(0,from.item().site);
       }
+      enlarge(origin, context);
+
       var site = origin;
       while(true) {
         String url = String.format("http://%s/%s.json", site, slug);
@@ -207,6 +213,19 @@ public class Main {
           }
         }
       }
+    }
+
+    public static void enlarge(String origin, List<String> context) {
+      System.out.println(String.format("origin: %s", origin));
+      System.out.println("Context:");
+      context.forEach((item) -> {
+        System.out.println(item);
+      });
+
+      System.out.println("Neighborhood:");
+      neighborhood.forEach((site, object) -> {
+        System.out.println(String.format("%s: %s", site, object));
+      });
     }
 
     public int next () {
@@ -285,5 +304,20 @@ public class Main {
     public Long date;
     public Item item;
     public String site;
+  }
+
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class PageInfo {
+    public Long date;
+    public String slug;
+    public String synopsis;
+    public String title;
+    public Map<String, String> links;
+  }
+
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class Neighbor {
+    public String site;
+    public List<PageInfo> siteMap;
   }
 }

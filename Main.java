@@ -43,7 +43,7 @@ public class Main {
     static List<Panel> lineup = new ArrayList<>();
 
   // neighborhood
-    static Map<String, Neighbor> neighborhood = new HashMap<String, Neighbor>();
+    static Map<String, SiteMap> neighborhood = new HashMap<>();
 
   public static void main(String... args) {
     if (args.length > 0) origin = args[0];
@@ -162,6 +162,30 @@ public class Main {
     return page;
   }
 
+  static SiteMap fetchSiteMap(String url) {
+    SiteMap map = null;
+    try {
+      HttpRequest request = HttpRequest.newBuilder()
+        .uri(new URI(url))
+        .header("User-Agent", "fedwiki-java")
+        .version(HttpClient.Version.HTTP_1_1)
+        .GET()
+        .build();
+      HttpResponse<String> response = HttpClient
+        .newBuilder()
+        .build()
+        .send(request, HttpResponse.BodyHandlers.ofString());
+      var code = response.statusCode();
+      if (code == 200) {
+        var mapper = new ObjectMapper();
+        map = mapper.readValue(response.body(), SiteMap.class);
+      }
+    } catch (URISyntaxException | IOException | InterruptedException e) {
+      trouble("http error: " + e.getMessage());
+    }
+    return map;
+  }
+
 
 // R U N T I M E
 
@@ -216,15 +240,12 @@ public class Main {
     }
 
     public static void enlarge(String origin, List<String> context) {
-      System.out.println(String.format("origin: %s", origin));
-      System.out.println("Context:");
-      context.forEach((item) -> {
-        System.out.println(item);
-      });
-
-      System.out.println("Neighborhood:");
-      neighborhood.forEach((site, object) -> {
-        System.out.println(String.format("%s: %s", site, object));
+      context.forEach((site) -> {
+        if(!neighborhood.containsKey(site)) {
+          System.out.println(String.format("Readning SiteMap %s",site));
+          var sitemap = fetchSiteMap(String.format("http://%s/system/sitemap.json",site));
+          neighborhood.put(site, sitemap);
+        }
       });
     }
 
@@ -316,8 +337,7 @@ public class Main {
   }
 
   @JsonIgnoreProperties(ignoreUnknown = true)
-  public static class Neighbor {
-    public String site;
-    public List<PageInfo> siteMap;
+  public static class SiteMap {
+    public List<PageInfo> infos = new ArrayList<>();
   }
 }

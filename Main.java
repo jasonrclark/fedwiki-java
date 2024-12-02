@@ -4,6 +4,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -47,6 +48,7 @@ public class Main {
 
   public static void main(String... args) {
     if (args.length > 0) origin = args[0];
+    enlarge(origin);
     lineup.add(Panel.load(origin,slug));
     String shown = null;
 
@@ -106,7 +108,7 @@ public class Main {
       System.out.println(each.page.title + ANSI_GREEN + " " + each.site + ANSI_RESET);
     System.out.println("==========================================");
     System.out.println(ANSI_PURPLE + location() + ANSI_RESET);
-  }
+   }
 
   static void test (String cmd, Item item) {
     // https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html
@@ -178,13 +180,24 @@ public class Main {
       var code = response.statusCode();
       if (code == 200) {
         var mapper = new ObjectMapper();
-        map = mapper.readValue(response.body(), SiteMap.class);
+        var infos = mapper.readValue(response.body(), PageInfo[].class);
+        map = new SiteMap();
+        map.infos = Arrays.asList(infos);
       }
     } catch (URISyntaxException | IOException | InterruptedException e) {
       trouble("http error: " + e.getMessage());
     }
     return map;
   }
+
+  public static void enlarge(String site) {
+    if(!neighborhood.containsKey(site)) {
+      System.out.println(String.format("Reading SiteMap %s",site));
+      var sitemap = fetchSiteMap(String.format("http://%s/system/sitemap.json",site));
+      neighborhood.put(site, sitemap);
+    }
+  }
+
 
 
 // R U N T I M E
@@ -215,7 +228,6 @@ public class Main {
         context.remove(from.item().site);
         context.add(0,from.item().site);
       }
-      enlarge(origin, context);
 
       var site = origin;
       while(true) {
@@ -225,6 +237,9 @@ public class Main {
           var panel = new Panel(site,slug);
           panel.page = page;
           panel.itemno = 0;
+          panel.context().forEach((each) -> {
+            enlarge(each);
+          });
           return panel;
         }
         else {
@@ -237,16 +252,6 @@ public class Main {
           }
         }
       }
-    }
-
-    public static void enlarge(String origin, List<String> context) {
-      context.forEach((site) -> {
-        if(!neighborhood.containsKey(site)) {
-          System.out.println(String.format("Readning SiteMap %s",site));
-          var sitemap = fetchSiteMap(String.format("http://%s/system/sitemap.json",site));
-          neighborhood.put(site, sitemap);
-        }
-      });
     }
 
     public int next () {

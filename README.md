@@ -28,6 +28,15 @@ Commands are unique in their first letter so that is all that is required.
 - __back *word*__ backup lineup to page with *word* in title.
 - __exit__ stop command execution and exit main.
 
+# organization
+
+The source code is contained in the single file *main.java* divided into sections by bold comments as follows.
+
+- INTERPRETER - The Java main program that dispatches each line based on their unique first characters to helper functions that stand in for the web interface that is absent in this implementation.
+- HELPERS - Functions typically called by the interpreter to perform imagined user interactions and then report the most essential elements of a response a user would expect.
+- RUNTIME - Storage and access to the persistent client-side state that makes up the lineup and neighborhood.
+- FEDERATION - Static class definitions for JSON data structures read from the server-sides of sites in the federation. This include a page's items and actions and a sitemap's info for each page.
+
 # roadmap
 
 Additional capabilites will be added as needs or curiosity motivates.
